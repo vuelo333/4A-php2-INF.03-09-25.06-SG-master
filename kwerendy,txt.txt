@@ -1,0 +1,5 @@
+1 SELECT AVG(liczba_pracownikow) AS 'srednia liczba pracownikow', MIN(liczba_pracownikow) AS 'minimalna ilosc pracownikow', MAX(liczba_pracownikow) AS 'najwiecej' FROM wykonawcy;
+2 SELECT nazwa_firmy, liczba_pracownikow FROM wykonawcy WHERE liczba_pracownikow >= 40;
+3 SELECT miasto FROM klienci GROUP by miasto ORDER BY miasto DESC;
+4 SELECT imie, cena FROM klienci JOIN zlecenia ON klienci.id_klienta = zlecenia.id_klienta WHERE miasto = 'Poznań';
+5 SELECT imie, nazwa_firmy FROM klienci JOIN zlecenia ON klienci.id_klienta = zlecenia.id_klienta JOIN wykonanie ON zlecenia.id_zlecenia = wykonanie.id_zlecenia JOIN wykonawcy ON wykonanie.id_wykonawcy = wykonawcy.id_wykonawcy;
