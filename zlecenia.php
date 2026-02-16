@@ -32,11 +32,20 @@
             <form action="zlecenia.php" method="post">
                 <label for="pracownicy">Ilu co najmniej pracowników potrzebujesz?</label>
                 <br>
-                <input type="number" id="pracownicy">
+                <input type="number" name="pracownicy-name" id="pracownicy">
                 <button type="submit">Szukaj firm</button>
             </form>
 
             <!-- tutaj skrypt 1 -->
+            <?php
+            $polaczenie = new mysqli("localhost", "root", "" , "remonty");
+            if (!empty($_POST['pracownicy-name']))  {
+             //echo $_POST["pracownicy-name"];
+            }
+            $sql = "SELECT nazwa_firmy, liczba_pracownikow FROM wykonawcy WHERE liczba_pracownikow >=" . $_POST["pracownicy-name"] . ";";
+            echo $sql;
+
+            ?>
 
         </section>
 
@@ -75,3 +84,7 @@
 </body>
 
 </html>
+
+<?php
+$polaczenie->close()
+?>
