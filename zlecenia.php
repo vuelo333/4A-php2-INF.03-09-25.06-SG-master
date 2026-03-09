@@ -21,9 +21,7 @@
 
         <aside>
             <img src="tapeta_lewa.png" alt="usługi">
-            <!-- poniżej powinna być tapeta_prawa.png -->
             <img src="tapeta_prawa.png" alt="usługi">
-
             <img src="tapeta_lewa.png" alt="usługi">
         </aside>
 
@@ -36,11 +34,9 @@
                 <button type="submit">Szukaj firm</button>
             </form>
 
-            <!-- tutaj skrypt 1 -->
             <?php
             $polaczenie = new mysqli("localhost", "root", "" , "remonty");
             if (!empty($_POST['pracownicy-name']))  {
-             //echo $_POST["pracownicy-name"];
             }
             $sql = "SELECT nazwa_firmy, liczba_pracownikow FROM wykonawcy WHERE liczba_pracownikow >=" . $_POST["pracownicy-name"] . ";";
             echo $sql;
@@ -54,7 +50,15 @@
 
             <form action="zlecenia.php" method="post">
                 <select>
-                    <!-- tutaj będzie skrypt 2 -->
+                     <?php
+                            $sql = "SELECT DISTINCT miasto FROM klienci ORDER BY miasto ASC";
+                            $wyniki = $polaczenie->query($sql);
+                            while ($wiersz = $wyniki->fetch_assoc()){
+                                echo "<option value>";
+                                echo $wiersz["miasto"];
+                                echo "</option>";
+                            }
+                        ?>
                 </select>
                 
                 <br>
@@ -73,13 +77,25 @@
             </form>
 
             <ul>
-                <!-- tutaj będzie skrypt 3 -->
+                <?php
+
+                    if(isset($_POST["formularz2"])) {
+                        $sql = "SELECT imie, cena FROM klienci JOIN zlecenia ON zlecenia.id_klienta=klienci.id_klienta WHERE miasto = 'Poznań' AND rodzaj='malowanie';";
+                        $wyniki = $polaczenie->query($sql);
+                        while ($wiersz = $wyniki-> fetch_assoc()){
+                            echo "<li>";
+                            echo $wiersz["imie"]. " - ";
+                            echo $wiersz["cena"];
+                            echo "</li>";
+                        }
+                    }                                
+                    ?>
             </ul>
         </section>
     </main>
 
     <footer>
-        <p><strong>Stronę wykonał: 666</strong></p>
+        <p><strong>Stronę wykonał</strong></p>
     </footer>
 </body>
 
